@@ -1,26 +1,19 @@
-import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { Component, Fragment } from "react";
+import { Route } from "react-router-dom";
+import Home from "../pages/home";
+import SignUp from "../pages/SignIn";
+import SignIn from "../pages/SignUp";
+import UserList from "../pages/UserList";
 
 class App extends Component {
   render() {
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
-      </div>
+      <Fragment>
+        <Route path="/" exact component={Home} />
+        <Route path="/signup" component={SignUp} />
+        <Route path="/signin" component={SignUp} />
+        <Route path="/users" component={UserList} />
+      </Fragment>
     );
   }
 }
