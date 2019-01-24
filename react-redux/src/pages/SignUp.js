@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Redirect } from "react-router-dom";
 import Axios from "axios";
 
 class SignUp extends Component {
@@ -6,7 +7,8 @@ class SignUp extends Component {
     name: "",
     age: 0,
     email: "",
-    password: ""
+    password: "",
+    success: false
   };
 
   handleChange = e => {
@@ -16,15 +18,34 @@ class SignUp extends Component {
   handleSubmit = async e => {
     e.preventDefault();
 
-    const response = await Axios.post(
-      "http://localhost:8000/api/auth/signup",
-      this.state
-    );
+    // const { success, ...rest } = this.state;
 
-    console.log(response);
+    // const response = await Axios.post("http://localhost:8000/api/auth/signup", {
+    //   ...rest
+    // });
+
+    const { name, age, email, password } = this.state;
+
+    console.log(this.state);
+
+    const response = await Axios.post("http://localhost:8000/api/auth/signup", {
+      name,
+      age,
+      email,
+      password
+    });
+
+    if (response.data === "Success") {
+      this.setState({ success: true });
+    } else {
+      alert("Failed to Sign Up");
+    }
   };
 
   render() {
+    if (this.state.success) {
+      return <Redirect to="/signin" />;
+    }
     return (
       <form onSubmit={this.handleSubmit}>
         <input

@@ -7,7 +7,7 @@ class UserList extends Component {
   };
 
   async componentDidMount() {
-    const users = await Axios.get("http:localhost:8000/users");
+    const users = await Axios.get("http://localhost:8000/api/users");
 
     this.setState({ users });
   }
